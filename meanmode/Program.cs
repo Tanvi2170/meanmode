@@ -11,7 +11,7 @@ namespace meanmode
         static void Main(string[] args)
         {
            
-            mean.showoutput();
+            stats.showoutput();
             Console.ReadLine();
                  
                     

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace meanmode
 {
-    internal class mean
+    internal class stats
     { public static void showoutput()
         {
             int[] numbers = { 40, 38, 37, 36, 34, 33, 32, 31, 30, 30, 30, 29, 26, 26, 19 };
