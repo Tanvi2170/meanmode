@@ -7,68 +7,77 @@ using System.Threading.Tasks;
 namespace meanmode
 {
     internal class stats
-    { public static void showoutput()
+    {
+        internal int[] numbers { private get; set; }
+
+        /// <summary>
+        /// method will calculate the sum of the encapsulated
+        /// </summary>
+        /// <returns>the sum of integers as an integer type</returns>
+        /// 
+        internal int calculatesum()
         {
-            int[] numbers = { 40, 38, 37, 36, 34, 33, 32, 31, 30, 30, 30, 29, 26, 26, 19 };
             int sum = 0;
-            double means = 0;
-            decimal median = 0;
-            int numbercount = numbers.Count();
-            int halfindex = numbers.Count() / 2;
-         
-           
-            var sortedNumbers = numbers.OrderBy(n => n);
+
             foreach (int items in numbers)
             {
                 sum += items;
             }
-            Console.WriteLine("total array count  = " + numbercount);
-            Console.WriteLine("sum of the array numbers is = " + sum);
+            // this uses a nifty util from .NET from the LINQ namespace
+            // see the "using..." section at the top of the file
 
-            // mean
+            return sum;
+        }
+        internal double calculatemean()
+        {
+            double means = 0;
+            int numbercount = numbers.Count();
+            int halfindex = numbers.Count() / 2;
+
+            means = calculatesum() / numbercount;
+
+            return means;
+        }
+        internal double calculatemedian()
+        {
+            double median = 0;
+            int numbercount = numbers.Count();
+            int halfindex = numbers.Count() / 2;
+
+            var sortedNumbers = numbers.OrderBy(n => n);
+            median = sortedNumbers.ElementAt(halfindex);
+
+            return median;
+        }
+        internal double calculatemode()
+        // mode is the index with maximum count
+        {
+            double mode = 0;
+            int max = numbers.Max();
+            int n = numbers.Length;
+
+
+            int t = max + 1;
+            int[] count = new int[t];
+            for (int i = 0; i < t; i++)
+                count[i] = 0;
+
+
+            for (int i = 0; i < n; i++)
+                count[numbers[i]]++;
+
+
+            int k = count[0];
+            for (int i = 1; i < t; i++)
             {
-                means = sum / numbercount;
-            }
-            Console.WriteLine("Mean of the array numbers is = " + means);
-
-            // median 
-            {
-                median = sortedNumbers.ElementAt(halfindex);
-            }
-            Console.WriteLine("median of the array numbers is = " + median);
-
-            //mode
-            
-            {
-               
-                int max = numbers.Max();
-                int n = numbers.Length;
-
-
-                int t = max + 1;
-                int[] count = new int[t];
-                for (int i = 0; i < t; i++)
-                    count[i] = 0;
-
-                
-                for (int i = 0; i < n; i++)
-                    count[numbers[i]]++;
-
-                // mode is the index with maximum count
-                int mode = 0;
-                int k = count[0];
-                for (int i = 1; i < t; i++)
+                if (count[i] > k)
                 {
-                    if (count[i] > k)
-                    {
-                        k = count[i];
-                        mode = i;
-                    }
+                    k = count[i];
+                    mode = i;
                 }
-
-                Console.WriteLine("mode = " + mode);
             }
 
+            return mode;
         }
 
 
