@@ -47,7 +47,7 @@ namespace meanmode
             var sortedNumbers = numbers.OrderBy(n => n);
             if ((numbercount % 2) == 0)
             {
-                median = ((sortedNumbers.ElementAt(halfindex) + sortedNumbers.ElementAt((halfindex + 1))) / 2);
+                median = ((sortedNumbers.ElementAt(halfindex) + sortedNumbers.ElementAt((halfindex - 1))) / 2);
             }
             else
             {
